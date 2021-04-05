@@ -101,6 +101,16 @@ def displayavailableappts(vaccdata):
     """
     return vaccdata[vaccdata.Appointments >= 1]
 
+def apptsmatchingdate(vaccdata, date):
+    """
+    Displays appointments matching the date selected by user, displays zero appts too
+    :param vaccdata: Dataframe of Location, Date, Appointments
+    :param date: MM/DD/YYYY string
+    :return:
+    """
+
+    
+
 
 vaccdata = scrapevaccineappt('02852')
 print(vaccdata.to_string(index=False))
