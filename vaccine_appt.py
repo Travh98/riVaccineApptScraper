@@ -59,10 +59,13 @@ def scrapevaccineappt(zipcode):
             title = str(ptitle[x].text).replace('\n', '')
             title = title.lstrip()
             title = title.rstrip()
-            title.replace(' on ', '')
-            datelist.append(title[:])
+            title = title.replace(' on ', '')
+            datelist.append(title[-10:])
+            title = title.replace(title[-10:], '')
+            title = title.rstrip()  # some locations have an extra space at the end, like Sockanosset POD
             titlelist.append(title)
         print(titlelist)
+        print(datelist)
     
         paragraphs = soup.find_all("p")
         
@@ -81,12 +84,13 @@ def scrapevaccineappt(zipcode):
         print(apptnumlist)
         
     print("Title Length: ", len(titlelist))
+    print("Date length: ", len(datelist))
     print("Appt Length: ", len(apptnumlist))
 
-    apptdataset = list(zip(titlelist, apptnumlist))
-    df = pd.DataFrame(data=apptdataset, columns=['Location', 'Appointments'])
-    df.to_csv('data/apptDataVaccine.csv', index=False, header=True)
-    return df
+    apptdataset = list(zip(titlelist, datelist, apptnumlist))
+    vaccdata = pd.DataFrame(data=apptdataset, columns=['Location', 'Date', 'Appointments'])
+    vaccdata.to_csv('data/apptDataVaccine.csv', index=False, header=True)
+    return vaccdata
 
 
-print(scrapevaccineappt('02852'))
+print(scrapevaccineappt('02852').to_string(index=False))
