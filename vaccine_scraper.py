@@ -37,7 +37,7 @@ def scrapevaccineappt(zipcode):
     datelist = []
     apptnumlist = []
     
-    for i in range(3):  # Scan all 3 pages of gov website
+    for i in range(10):  # Scan through 10 pages
         i = str(i + 1)
         print("Page: ", i)
         govwebsiteschedule = 'https://www.vaccinateri.org/clinic/search?location=' + zipcode + \
@@ -99,19 +99,47 @@ def displayavailableappts(vaccdata):
     :param vaccdata: Dataframe of Location, Date, Appointments
     :return:
     """
+    if vaccdata[vaccdata.Appointments >= 1].empty:
+        print("No available appointments.")
     return vaccdata[vaccdata.Appointments >= 1]
+
 
 def apptsmatchingdate(vaccdata, date):
     """
     Displays appointments matching the date selected by user, displays zero appts too
     :param vaccdata: Dataframe of Location, Date, Appointments
-    :param date: MM/DD/YYYY string
+    :param date: MM/DD/YYYY format string
     :return:
     """
+    date = str(date)
+    if vaccdata[vaccdata.Date == date].empty:
+        print("No data for this date yet.")
+    return vaccdata[vaccdata.Date == date]
 
-    
+
+def vaccinedatadump(vaccdata, areacode):
+    vaccdataframe = scrapevaccineappt(str(areacode))
+
+    # Go through every row of dataframe, and do things with the columns
+    totalappts = 0
+    for index, row in vaccdataframe.iterrows():
+        #print(row['Date'], row['Appointments'], row['Location'])
+        totalappts += row['Appointments']
+    print("Total Appointments Available: ", totalappts)
+
+    # Number of unique locations with available appointments
+    locationdataframe = displayavailableappts(vaccdataframe)
+    locationset = set(locationdataframe['Location'])
+    print("Number of Locations with Available Appointments: ", len(displayavailableappts(vaccdataframe)))
 
 
-vaccdata = scrapevaccineappt('02852')
-print(vaccdata.to_string(index=False))
-print(displayavailableappts(vaccdata).to_string(index=False))
+
+# Main testing here
+vaccdataframe = scrapevaccineappt('02852')
+print(vaccdataframe.to_string(index=False))
+print(displayavailableappts(vaccdataframe).to_string(index=False))
+print(apptsmatchingdate(vaccdataframe, '04/20/2021').to_string(index=False))
+print("Number of Locations with Available Appointments: ", len(displayavailableappts(vaccdataframe)))
+
+# print("Hey I want available appointments on this date")
+# print(displayavailableappts(apptsmatchingdate(vaccdataframe, '04/11/2021')).to_string(index=False))
