@@ -12,13 +12,16 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import csv
 import vaccine_scrapper as vac
+import rpi_client as rpi
 
 titleList = []
 apptNumList = []
-    
+rpi.connect()
 class COVID(tk.Tk):
     
-    def make_an_appointment(self, location, date):            #New window to enter personal information
+    def make_an_appointment(self, location, date, appt):            #New window to enter personal information
+    
+        rpi.send_msg(str(appt))
         newWin = tk.Toplevel(root)
         newWin.title("Enter information here")
         newWin.geometry("500x200")
@@ -36,11 +39,11 @@ class COVID(tk.Tk):
         
         
         
-        
         print(location)
         return
     
     def Scrape(self):                                    #Method to isolate and display available appointments with respect to date
+        self.button = []
         if self.date_entry.get() == "MM/DD/YYYY":
             vaccdata = vac.scrapevaccineappt(self.zipcode.get())
             vac_available = vac.displayavailableappts(vaccdata).to_string(index=False)
@@ -51,7 +54,10 @@ class COVID(tk.Tk):
                 sitei = ttk.Label(self, text = str(row["Location"])).grid(column = 0, row = i)
                 appi = ttk.Label(self, text = str(row["Appointments"])).grid(column = 1, row = i)
                 datei = ttk.Label(self, text = str(row["Date"])).grid(column = 2, row = i)
-                buttoni = ttk.Button(self, text = "Book Here!", command = lambda : self.make_an_appointment(row["Location"], row["Date"])).grid(column = 3, row = i)
+                x = row["Location"]
+                y = row["Date"]
+                z = row["Appointments"]
+                self.button.append(ttk.Button(self, text = "Book Here!", command = lambda x=x, y=y, z=z: self.make_an_appointment(x, y, z)).grid(column = 3, row = i))
                 i += 1 
         else:
             vaccination_data = vac.scrapevaccineappt(self.zipcode.get())
@@ -64,7 +70,10 @@ class COVID(tk.Tk):
                 sitei = ttk.Label(self, text = str(row["Location"])).grid(column = 0, row = i)
                 appi = ttk.Label(self, text = str(row["Appointments"])).grid(column = 1, row = i)
                 datei = ttk.Label(self, text = str(row["Date"])).grid(column = 2, row = i)
-                buttoni = ttk.Button(self, text = "Book Here!", command = lambda : self.make_an_appointment(row["Location"], row["Date"])).grid(column = 3, row = i)
+                x = row["Location"]
+                y = row["Date"]
+                z = row["Appointments"]
+                self.button.append(ttk.Button(self, text = "Book Here!", command = lambda x=x, y=y, z=z: self.make_an_appointment(x, y, z)).grid(column = 3, row = i))
                 i += 1     
     
     def __init__(self):
@@ -94,3 +103,4 @@ class COVID(tk.Tk):
         
 root = COVID()
 root.mainloop()
+rpi.end_conn()
