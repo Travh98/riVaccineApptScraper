@@ -21,10 +21,22 @@ class COVID(tk.Tk):
     def make_an_appointment(self, location, date):            #New window to enter personal information
         newWin = tk.Toplevel(root)
         newWin.title("Enter information here")
-        newWin.geometry("200x200")
-        self.name = tk.StringVar()
-        ttk.Label(newWin, text = "Enter Name: ").grid(column = 0, row = 0, pady = 10)
-        ttk.Entry(newWin, width = 15, textvariable = self.name).grid(column = 1, row = 0, pady = 10)
+        newWin.geometry("500x200")
+        
+        #Variables for entries
+        self.fname = tk.StringVar()
+        self.lname = tk.StringVar()
+        
+        """Entry declarations for required fields"""
+        #First and Last name
+        ttk.Label(newWin, text = "First Name: ").grid(column = 0, row = 0, pady = 5)
+        ttk.Entry(newWin, width = 15, textvariable = self.fname).grid(column = 1, row = 0, pady = 10)
+        ttk.Label(newWin, text = "Last Name: ").grid(column = 2, row = 0, pady = 5)
+        ttk.Entry(newWin, width = 15, textvariable= self.lname).grid(column = 3, row = 0)
+        
+        
+        
+        
         print(location)
         return
     
