@@ -93,4 +93,15 @@ def scrapevaccineappt(zipcode):
     return vaccdata
 
 
-print(scrapevaccineappt('02852').to_string(index=False))
+def displayavailableappts(vaccdata):
+    """
+    Displays number of appointments, on this date, at this location, if there are appts available
+    :param vaccdata: Dataframe of Location, Date, Appointments
+    :return:
+    """
+    return vaccdata[vaccdata.Appointments >= 1]
+
+
+vaccdata = scrapevaccineappt('02852')
+print(vaccdata.to_string(index=False))
+print(displayavailableappts(vaccdata).to_string(index=False))
