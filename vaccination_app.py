@@ -11,7 +11,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import csv
-import vaccine_scrapper as vac
+import vaccine_scraper as vac
 import rpi_client as rpi
 
 titleList = []

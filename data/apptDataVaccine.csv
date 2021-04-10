@@ -1,54 +1,32 @@
-Location,Date,Appointments
-Seaside Pharmacy,04/05/2021,0
-Matt's Local Pharmacy,04/05/2021,0
-Sockanosset POD,04/06/2021,0
-Dunkin Donuts Center POD,04/06/2021,0
-Johnston Recreation Center POD,04/06/2021,0
-Sockanosset POD,04/06/2021,439
-Middletown POD,04/06/2021,0
-Dunkin Donuts Center POD,04/06/2021,0
-Matt's Local Pharmacy,04/06/2021,2
-Sockanosset POD,04/07/2021,0
-Dunkin Donuts Center POD,04/07/2021,0
-Middletown POD,04/07/2021,0
-Westerly Senior Citizens Center POD,04/07/2021,0
-East Providence Senior Center POD,04/07/2021,0
-Johnston Recreation Center POD,04/07/2021,1
-Dunkin Donuts Center POD,04/07/2021,0
-Green Line Apothecary Wakefield,04/07/2021,0
-Matt's Local Pharmacy,04/07/2021,0
-AJ Pharmacy,04/07/2021,0
-Suburban Pharmacy,04/07/2021,0
-Suburban Pharmacy,04/07/2021,0
-Sockanosset POD,04/08/2021,0
-Dunkin Donuts Center POD,04/08/2021,0
-Middletown POD,04/08/2021,0
-Sockanosset POD,04/08/2021,1
-Seaside Pharmacy,04/08/2021,0
-Dunkin Donuts Center POD,04/08/2021,0
-Green Line Apothecary Wakefield,04/08/2021,0
-AJ Pharmacy,04/08/2021,0
-Sockanosset POD,04/09/2021,0
-Dunkin Donuts Center POD,04/09/2021,1
-Middletown POD,04/09/2021,0
-East Providence Senior Center POD,04/09/2021,0
-Sockanosset POD,04/09/2021,0
-Seaside Pharmacy,04/09/2021,0
-Dunkin Donuts Center POD,04/09/2021,0
-White Cross Pharmacy,04/09/2021,0
-AJ Pharmacy,04/09/2021,0
-Suburban Pharmacy,04/09/2021,0
-Suburban Pharmacy,04/09/2021,0
-Sockanosset POD,04/10/2021,0
-Sockanosset POD,04/10/2021,0
-Green Line Apothecary Providence,04/10/2021,0
-Green Line Apothecary Wakefield,04/10/2021,0
-AJ Pharmacy,04/10/2021,0
-Middletown POD,04/10/2021,0
-Middletown POD,04/11/2021,0
-Green Line Apothecary Providence,04/11/2021,0
-Green Line Apothecary Wakefield,04/11/2021,0
-AJ Pharmacy,04/11/2021,0
-Suburban Pharmacy,04/11/2021,0
-South County POD,04/11/2021,0
-Green Line Apothecary Wakefield,04/12/2021,0
+Location,Date,Address,Vaccine,Appointments,Link
+Green Line Apothecary Providence,04/10/2021,"905 North Main St, Providence Rhode Island, 02904",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Matt's Local Pharmacy,04/10/2021,"88 E Main Rd, Middletown RI, 02842",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Green Line Apothecary Providence,04/10/2021,"905 North Main St, Providence RI, 02904",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org/client/registration?clinic_id=2027
+Middletown POD,04/11/2021,"1400 West Main Road, Middletown RI, 02842",Pfizer-BioNTech COVID-19 Vaccine,1,https://www.vaccinateri.org/client/registration?clinic_id=1380
+Green Line Apothecary Providence,04/11/2021,"905 North Main St, Providence Rhode Island, 02904",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Woonsocket POD,04/11/2021,"1500 Diamond Hill Road, Woonsocket Rhode Island, 02895",Janssen COVID-19 Vaccine,564,https://www.vaccinateri.org/client/registration?clinic_id=1726
+South County POD,04/11/2021,"132 Fairgrounds Road, West Kingston Rhode Island, 02892",Moderna COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Matt's Local Pharmacy,04/11/2021,"88 E Main Rd, Middletown RI, 02842",Janssen COVID-19 Vaccine,2,https://www.vaccinateri.org[]
+Westerly Senior Citizens Center POD,04/12/2021,"39 State Street, Westerly Rhode Island, 02891",Pfizer-BioNTech COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Matt's Local Pharmacy,04/12/2021,"88 E Main Rd, Middletown Rhode Island, 02842",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Johnston Recreation Center POD,04/13/2021,"1741 Atwood Avenue, Johnston Rhode Island, 02919",Pfizer-BioNTech COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Seaside Pharmacy,04/13/2021,"224 Post Road, Westerly RI, 02891",Moderna COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Green Line Apothecary Wakefield,04/13/2021,"203 Main St, Wakefield RI, 02879",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org/client/registration?clinic_id=1927
+Sockanosset POD ,04/13/2021,"100 Sockanosset Cross Road, Cranston RI , 02920",Moderna COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Dunkin Donuts Center POD,04/13/2021,"1 La Salle Square, Providence Rhode Island, 02903",Moderna COVID-19 Vaccine,548,https://www.vaccinateri.org/client/registration?clinic_id=1946
+AJ Pharmacy ,04/13/2021,"1017 Smith St, Providence RI, 02908",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Green Line Apothecary Providence,04/13/2021,"905 North Main St, Providence RI, 02904",Moderna COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Middletown POD,04/14/2021,"1400 West Main Road, Middletown RI, 02842",Pfizer-BioNTech COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Westerly Senior Citizens Center POD,04/14/2021,"39 State Street, Westerly Rhode Island, 02891",Pfizer-BioNTech COVID-19 Vaccine,135,https://www.vaccinateri.org/client/registration?clinic_id=1637
+East Providence Senior Center POD,04/14/2021,"610 Waterman Ave, East Providence Rhode Island, 02914",Pfizer-BioNTech COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Sockanosset POD ,04/14/2021,"100 Sockanosset Cross Road, Cranston RI , 02920",Pfizer-BioNTech COVID-19 Vaccine,1,https://www.vaccinateri.org/client/registration?clinic_id=1865
+Sockanosset POD ,04/14/2021,"100 Sockanosset Cross Road, Cranston RI , 02920",Moderna COVID-19 Vaccine,429,https://www.vaccinateri.org/client/registration?clinic_id=1939
+Suburban Pharmacy,04/14/2021,"242 Pawtuxet Ave, Warwick RI, 02888",Janssen COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+Green Line Apothecary Wakefield,04/14/2021,"203 Main St, Wakefield RI, 02879",Moderna COVID-19 Vaccine,0,https://www.vaccinateri.org[]
+McQuades Marketplace Pharmacy,04/14/2021,"106 Main St, Westerly RI, 02891",Moderna COVID-19 Vaccine,1,https://www.vaccinateri.org/client/registration?clinic_id=1995
+Middletown POD,04/15/2021,"1400 West Main Road, Middletown RI, 02842",Pfizer-BioNTech COVID-19 Vaccine,10,https://www.vaccinateri.org/client/registration?clinic_id=1305
+Sockanosset POD ,04/15/2021,"100 Sockanosset Cross Road, Cranston RI , 02920","Pfizer-BioNTech COVID-19 Vaccine, Moderna COVID-19 Vaccine",809,https://www.vaccinateri.org/client/registration?clinic_id=1936
+Sockanosset POD ,04/15/2021,"100 Sockanosset Cross Road, Cranston RI , 02920",Moderna COVID-19 Vaccine,287,https://www.vaccinateri.org/client/registration?clinic_id=1940
+East Providence Senior Center POD,04/16/2021,"610 Waterman Ave, East Providence Rhode Island, 02914",Pfizer-BioNTech COVID-19 Vaccine,24,https://www.vaccinateri.org/client/registration?clinic_id=1640
+Dunkin Donuts Center POD,04/17/2021,"1 La Salle Square, Providence Rhode Island, 02903",Pfizer-BioNTech COVID-19 Vaccine,2700,https://www.vaccinateri.org/client/registration?clinic_id=1313
+Sockanosset POD ,04/17/2021,"100 Sockanosset Cross Road, Cranston RI , 02920",Pfizer-BioNTech COVID-19 Vaccine,947,https://www.vaccinateri.org/client/registration?clinic_id=1886
