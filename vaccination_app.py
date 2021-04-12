@@ -33,6 +33,10 @@ class COVID(tk.Tk):
         if location == "Matt's Local Pharmacy":
             print("Call here")
             ttk.Label(self, text = "401-619-5020").grid(column = 4, row = j)
+        elif link[-2:] == '[]':
+            print("no available website /n")
+            print("Try looking for a phone number for", location)
+            ttk.Label(self, text = "NA").grid(column = 4, row = j)
         else:
             print(link)
             webbrowser.open(link)
