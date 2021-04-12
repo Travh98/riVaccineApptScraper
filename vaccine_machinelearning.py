@@ -38,14 +38,15 @@ def combine_csv():
 
 
 def convert_date_to_weekday(date):
+    # print("Converting to weekday")
     # Reference: https://www.codespeedy.com/find-the-day-of-week-with-a-given-date-in-python/
     # Date is in format MM/DD/YYYY
     date = str(date)
     datelist = list(map(int, date.split('/')))  # outputs a integer list of [date, month, year]
-    day_of_week = datetime.date(datelist[2], datelist[1], datelist[0]).weekday()  # returns integer (0 thru 6)
+    day_of_week = datetime.date(datelist[2], datelist[0], datelist[1]).weekday()  # returns integer (0 thru 6)
 
-    week_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    print(week_days[day_of_week])
+    # week_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    # print(week_days[day_of_week])
     return day_of_week  # returns integer (0 - 6)
 
 
@@ -59,7 +60,10 @@ def mango():
     # vaccdata_X = [location, date]
 
     vaccdata_X = vaccdata.drop(columns=['Address', 'Vaccine', 'Appointments', 'Link', 'Time Accessed'])  # Input Set
-    vaccdata_X['Date'] = convert_date_to_weekday(vaccdata_X['Date'].to_string(index=False))
+    for index, row in vaccdata_X.iterrows():  # Go through each row of the dataframe
+        row['Date'] = convert_date_to_weekday(row['Date'])  # Convert each date to weekday int
+        # print(row['Date'])
+
     vaccdata_Y = vaccdata['Appointments']  # Output Set, only Appointments
     print(vaccdata_X)
     print(vaccdata_Y)
