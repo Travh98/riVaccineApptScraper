@@ -68,6 +68,7 @@ def scrapevaccineappt(zipcode):
             date = location[-10:]  # DD/MM/YYYY at the end of Location title
             location = location.replace(location[-10:], '')  # Make location only have location name, remove date
             location = location.replace(' on ', '')
+            location = location.rstrip()
             # print(location)
             # print(date)
             address = card.find('p', '')  # first generic paragraph tag in the card

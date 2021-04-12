@@ -1,7 +1,10 @@
 import pandas as pd  # for DataFrames
 import numpy as np  # for multi-dimensional arrays
 import matplotlib  # for plotting and graphing
-import sklearn  # Scikit-Learn, machine learning library that provides algorithms
+from sklearn.tree import DecisionTreeClassifier  # Scikit-Learn, machine learning library that provides algorithms
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import joblib
 
 # Libraries for combining csv files
 import os
@@ -60,14 +63,60 @@ def mango():
     # vaccdata_X = [location, date]
 
     vaccdata_X = vaccdata.drop(columns=['Address', 'Vaccine', 'Appointments', 'Link', 'Time Accessed'])  # Input Set
+
+    locationSet = set(vaccdata_X['Location'])  # Set of every unique Location name
+    locationList = list(locationSet)  # List of every unique Location
+
     for index, row in vaccdata_X.iterrows():  # Go through each row of the dataframe
+        row['Location'] = locationList.index(row['Location'])   # Convert each location to the index of locationSet
         row['Date'] = convert_date_to_weekday(row['Date'])  # Convert each date to weekday int
-        # print(row['Date'])
+    # Input set now consists of [index of location, day of week (int between 0 and 6)]
 
     vaccdata_Y = vaccdata['Appointments']  # Output Set, only Appointments
-    print(vaccdata_X)
-    print(vaccdata_Y)
+
+    """# split data into training and testing sets
+    # test_size determines how much of the train data to save for testing
+    x_train, x_test, y_train, y_test = train_test_split(vaccdata_X, vaccdata_Y, test_size=0.2)
+
+    # This is where we train the model, which we do not want to do every time
+    model = DecisionTreeClassifier()  # sklearn model
+    model.fit(x_train, y_train)  # pass only the training sets
+
+    print("Dumping Model")
+    joblib.dump(model, 'weeklyvaccdata.joblib')"""
+
+    location1 = locationList.index('Sockanosset POD ')
+    model = joblib.load('weeklyvaccdata.joblib')
+    predictions = model.predict([[location1, 4]])
+    print(predictions)
+
+    """# Manual machine learning test with our input
+    location1 = locationList.index('Sockanosset POD ')
+    # location2 = locationList.index('Woonsocket POD')
+    print("Predicting # of Appts at", locationList[location1], "for every weekday")
+    predictions = model.predict([[location1, 0], [location1, 1], [location1, 2], [location1, 3], [location1, 4], [location1, 5], [location1, 6]])
+    print(predictions)
+
+    predictions = model.predict(x_test)  # predict using the test set
+
+    score = accuracy_score(y_test, predictions)  # how accurate the machine learning is (this varies every time)
+
+    print(round(score, 3), "% Accuracy")"""
+# End of machine learning function
 
 
+def see_predicted_week(location):
+    """
+
+    :param location: string - will need to lstrip and rstrip
+    :return: plot of predicted number of appts over the 7 days of the week
+    """
+
+    # hey figure out how to run this twice a day
+
+    return plot
+
+
+# Main testing
 mango()
 
