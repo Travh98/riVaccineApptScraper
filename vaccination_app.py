@@ -2,82 +2,72 @@
 """
 Created on Mon Mar 29 14:11:21 2021
 
-@author: Giles Lanowy
+@author: Giles Lanowy and John Hunter
 """
 
 import tkinter as tk
 from tkinter import ttk
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-import csv
-import vaccine_scraper as vac
-import vaccine_machinelearning as vacml
 import rpi_client as rpi
+import webbrowser
+#Comment or Uncomment next two lines as necessary
+#import vaccine_scraper as vax
+import vax_scrapper as vax
 
-print("Running Vaccine Scraper GUI Application")
 
 titleList = []
 apptNumList = []
-rpi.connect()  # Run client on the user's desktop
+rpi.connect()
+
 class COVID(tk.Tk):
     
-    def make_an_appointment(self, location, date, appt):            #New window to enter personal information
+    def eliminate(self):
+        for label in self.grid_slaves():
+            if int(label.grid_info()["row"]) > 1:
+                label.grid_forget()
     
-        rpi.send_msg(str(appt))
-        newWin = tk.Toplevel(root)
-        newWin.title("Enter information here")
-        newWin.geometry("500x200")
+    def make_an_appointment(self, j, link, location, appt):            #New window to enter personal information... Vac, date not included
+    
+        rpi.send_msg(str(appt))                                    # send message with number of appointments to rpi
         
-        #Variables for entries
-        self.fname = tk.StringVar()
-        self.lname = tk.StringVar()
-        
-        """Entry declarations for required fields"""
-        #First and Last name
-        ttk.Label(newWin, text = "First Name: ").grid(column = 0, row = 0, pady = 5)
-        ttk.Entry(newWin, width = 15, textvariable = self.fname).grid(column = 1, row = 0, pady = 10)
-        ttk.Label(newWin, text = "Last Name: ").grid(column = 2, row = 0, pady = 5)
-        ttk.Entry(newWin, width = 15, textvariable= self.lname).grid(column = 3, row = 0)
-        
-        
-        
+        #Open web page for making an appointment
+        if location == "Matt's Local Pharmacy":
+            print("Call here")
+            ttk.Label(self, text = "401-619-5020").grid(column = 4, row = j)
+        else:
+            print(link)
+            webbrowser.open(link)
+
         print(location)
         return
     
-    def Scrape(self):                                    #Method to isolate and display available appointments with respect to date
+    def Scrape(self):                                    #Method to isolate and display available appointments with respect to date and zip
         self.button = []
-        if self.date_entry.get() == "MM/DD/YYYY":
-            vaccdata = vac.scrapevaccineappt(self.zipcode.get())
-            vac_available = vac.displayavailableappts(vaccdata).to_string(index=False)
-            print(vac_available)
-            vac_data = vac.displayavailableappts(vaccdata)
-            i = 2
-            for index, row in vac_data.iterrows():
-                sitei = ttk.Label(self, text = str(row["Location"])).grid(column = 0, row = i)
-                appi = ttk.Label(self, text = str(row["Appointments"])).grid(column = 1, row = i)
-                datei = ttk.Label(self, text = str(row["Date"])).grid(column = 2, row = i)
-                x = row["Location"]
-                y = row["Date"]
-                z = row["Appointments"]
-                self.button.append(ttk.Button(self, text = "Book Here!", command = lambda x=x, y=y, z=z: self.make_an_appointment(x, y, z)).grid(column = 3, row = i))
-                i += 1 
+        
+        self.eliminate()
+        
+        if self.date_entry.get() == "MM/DD/YYYY" or self.date_entry.get() == "":
+            vaccdata = vax.scrapevaccineappt(self.zipcode.get())
+            vac_available = vax.displayavailableappts(vaccdata).to_string(index=False)
+           
         else:
-            vaccination_data = vac.scrapevaccineappt(self.zipcode.get())
-            vaccdata = vac.apptsmatchingdate(vaccination_data, self.date_entry.get())
-            vac_available = vac.displayavailableappts(vaccdata).to_string(index=False)
-            print(vac_available)
-            vac_data = vac.displayavailableappts(vaccdata)
-            i = 2
-            for index, row in vac_data.iterrows():
-                sitei = ttk.Label(self, text = str(row["Location"])).grid(column = 0, row = i)
-                appi = ttk.Label(self, text = str(row["Appointments"])).grid(column = 1, row = i)
-                datei = ttk.Label(self, text = str(row["Date"])).grid(column = 2, row = i)
-                x = row["Location"]
-                y = row["Date"]
-                z = row["Appointments"]
-                self.button.append(ttk.Button(self, text = "Book Here!", command = lambda x=x, y=y, z=z: self.make_an_appointment(x, y, z)).grid(column = 3, row = i))
-                i += 1     
+            vaccination_data = vax.scrapevaccineappt(self.zipcode.get())                #includes date reference
+            vaccdata = vax.apptsmatchingdate(vaccination_data, self.date_entry.get())
+            vac_available = vax.displayavailableappts(vaccdata).to_string(index=False)
+              
+        print(vac_available)
+        vac_data = vax.displayavailableappts(vaccdata)
+            
+        i = 2
+        for index, row in vac_data.iterrows():
+            sitei = ttk.Label(self, text = str(row["Location"])).grid(column = 0, row = i)
+            appi = ttk.Label(self, text = str(row["Appointments"])).grid(column = 1, row = i)
+            datei = ttk.Label(self, text = str(row["Date"])).grid(column = 2, row = i)
+            vaxi = ttk.Label(self, text = str(row["Vaccine"]).replace("COVID-19 Vaccine", '')).grid(column = 3, row = i)
+            v = row["Link"]
+            x = row["Location"]
+            z = row["Appointments"]
+            self.button.append(ttk.Button(self, text = "Book Here!", command = lambda i=i, v=v, x=x, z=z: self.make_an_appointment(i, v, x, z)).grid(column = 4, row = i))
+            i += 1 
     
     def __init__(self):
         super().__init__()
@@ -101,8 +91,9 @@ class COVID(tk.Tk):
         zip_entry.grid(column = 1, row = 0, sticky = "W")
         
         loc_appointments = ttk.Label(self, text = "Location").grid(column = 0, row = 1)
-        no_appointments = ttk.Label(self, text = "Available Appointments").grid(column = 1, row = 1)
-        date_appointments = ttk.Label(self, text = "Date").grid(column = 2, row = 1)    
+        no_appointments = ttk.Label(self, text = "           Available Appointments or \nAppointments Currently Being Booked").grid(column = 1, row = 1)
+        date_appointments = ttk.Label(self, text = "Date").grid(column = 2, row = 1)  
+        vax_type = ttk.Label(self, text = "Vaccine").grid(column = 3, row = 1)
         
 root = COVID()
 root.mainloop()
