@@ -2,7 +2,7 @@
 """
 Created on Mon Mar 29 14:11:21 2021
 
-@author: Giles Lanowy
+@author: Giles Lanowy and John Hunter
 """
 
 import tkinter as tk
