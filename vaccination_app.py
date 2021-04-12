@@ -20,7 +20,7 @@ rpi.connect()
 
 class COVID(tk.Tk):
     
-    def eliminate(self):
+    def eliminate(self):       #Deletes old labels from previous searches
         for label in self.grid_slaves():
             if int(label.grid_info()["row"]) > 1:
                 label.grid_forget()
