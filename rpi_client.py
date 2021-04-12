@@ -9,7 +9,7 @@ Created on Mon Apr  5 14:09:42 2021
 
 import socket
 
-IP_ADDR = "192.168.1.156"
+IP_ADDR = "192.168.1.219"
 PORT = 9607
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 

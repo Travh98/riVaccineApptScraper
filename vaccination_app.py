@@ -12,11 +12,14 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import csv
 import vaccine_scraper as vac
+import vaccine_machinelearning as vacml
 import rpi_client as rpi
+
+print("Running Vaccine Scraper GUI Application")
 
 titleList = []
 apptNumList = []
-rpi.connect()
+rpi.connect()  # Run client on the user's desktop
 class COVID(tk.Tk):
     
     def make_an_appointment(self, location, date, appt):            #New window to enter personal information

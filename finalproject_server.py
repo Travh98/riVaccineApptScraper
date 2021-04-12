@@ -1,4 +1,5 @@
-#server for final project
+# Server for final project
+# Run this program on the Server (the raspberry pi)
 
 from sense_hat import SenseHat
 import socket

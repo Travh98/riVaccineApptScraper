@@ -68,14 +68,14 @@ def scrapevaccineappt(zipcode):
             date = location[-10:]  # DD/MM/YYYY at the end of Location title
             location = location.replace(location[-10:], '')  # Make location only have location name, remove date
             location = location.replace(' on ', '')
-            print(location)
-            print(date)
+            # print(location)
+            # print(date)
             address = card.find('p', '')  # first generic paragraph tag in the card
             address = address.text.lstrip().rstrip()
-            print(address)
+            # print(address)
             vaccine_type = card.find_all('strong', limit=2)
             vaccine_type = vaccine_type[1].text.lstrip().rstrip()
-            print(vaccine_type)
+            # print(vaccine_type)
             appointments = card.find_all('p')
             for appts in appointments:  # scan every paragraph tag for a specific string
                 if "Appointments Available" in appts.text:
@@ -86,12 +86,12 @@ def scrapevaccineappt(zipcode):
                     # Portuguese
                 if "Agendamentos disponíveis" in appts.text:
                     appointments = int(appts.text.replace(appts.strong.text, ''))
-            print("Appointments Availabull: ", appointments)
+            # print("Appointments Availabull: ", appointments)
             signuplink = card.find_all('a', 'button-primary px-4')
             for link in signuplink:
                 signuplink = link.get('href')
             signuplink = 'https://www.vaccinateri.org' + str(signuplink)  # hyperlink to schedule an appt at this site
-            print(signuplink)
+            # print(signuplink)
 
             # Create a dictionary of the card's data to append into dataframe
             card_dict = {
@@ -159,8 +159,8 @@ def vaccinedatadump(vaccdata, areacode):
 
 
 # Main testing here
-vaccdataframe = scrapevaccineappt('02852')
-print(vaccdataframe)
+# vaccdataframe = scrapevaccineappt('02852')
+# print(vaccdataframe)
 # print(vaccdataframe.to_string(index=False))
 # print(displayavailableappts(vaccdataframe).to_string(index=False))
 # print(apptsmatchingdate(vaccdataframe, '04/20/2021').to_string(index=False))
