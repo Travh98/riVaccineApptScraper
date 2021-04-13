@@ -160,7 +160,7 @@ def vaccinedatadump(vaccdata, areacode):
 
 
 # Main testing here
-# vaccdataframe = scrapevaccineappt('02852')
+vaccdataframe = scrapevaccineappt('02852')
 # print(vaccdataframe)
 # print(vaccdataframe.to_string(index=False))
 # print(displayavailableappts(vaccdataframe).to_string(index=False))
