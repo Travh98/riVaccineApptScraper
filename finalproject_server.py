@@ -7,7 +7,7 @@ import time
 
 sense = SenseHat()
 
-host = '192.168.1.156'
+host = '' #Insert IP here
 port = 9607
 s = socket.socket()
 s.bind((host, port))
