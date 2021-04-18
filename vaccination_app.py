@@ -12,15 +12,52 @@ import webbrowser
 #Comment or Uncomment next two lines as necessary
 #import vaccine_scraper as vax
 import vax_scrapper as vax
+import vaccine_machinelearning_gl as vML
+#import vaccine_machinelearning as vML
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 titleList = []
 apptNumList = []
 rpi.connect()
 
+p = plt.figure()
+px = p.add_subplot(1,1,1)
+
 class COVID(tk.Tk):
     
-    def eliminate(self):       #Deletes old labels from previous searches
+    def ML(self, location):
+        
+        z = vML.generate_model_location_weekday()
+        x,y = vML.see_predicted_week(location)
+        
+        predicted_plot = plt.plot(x, y, marker='o')
+        title_str = "Predicted Appointments for " + location
+        plt.title(title_str)
+        plt.xlabel("Day of Week")
+        plt.ylabel("Appointments")
+        plt.show(block = False)
+        
+        ml = tk.Toplevel()
+        ml.wm_title("Best days to look for appointments at " + location)
+        ml.geometry("600x200")
+        ttk.Label(ml, text = "Day of Week:   ").grid(column = 0, row = 0) 
+        ttk.Label(ml, text = "No. of Appts:  ").grid(column = 0, row = 1)
+        i = 1
+        for entry in x:
+            ttk.Label(ml, text = entry).grid(column = i, row = 0, padx = 5, pady = 5)
+            i+=1
+        i = 1
+        for entry in y:
+            ttk.Label(ml, text = entry).grid(column = i, row = 1)
+            i+=1
+            
+        ttk.Label(ml, text = "Model Accuracy = " + str(z) + " %").grid(column = 0, row = 2, pady = 10)
+        
+        return
+    
+    def eliminate(self):
         for label in self.grid_slaves():
             if int(label.grid_info()["row"]) > 1:
                 label.grid_forget()
@@ -33,12 +70,15 @@ class COVID(tk.Tk):
         if location == "Matt's Local Pharmacy":
             print("Call here")
             ttk.Label(self, text = "401-619-5020").grid(column = 4, row = j)
+            self.ML(location)
         elif link[-2:] == '[]':
             print("no available website /n")
             print("Try looking for a phone number for", location)
             ttk.Label(self, text = "NA").grid(column = 4, row = j)
         else:
             print(link)
+            location = location.rstrip()
+            self.ML(location)
             webbrowser.open(link)
 
         print(location)
@@ -76,7 +116,7 @@ class COVID(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("COVID-19 Vaccine Appointments")
-        self.geometry("650x180")
+        self.geometry("700x180")
         
         self.zipcode = tk.StringVar()
         self.date_entry = tk.StringVar()
