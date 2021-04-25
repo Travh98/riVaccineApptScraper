@@ -112,7 +112,7 @@ def predict_appointment(location_name, weekday):
     """
     global locationList
     week_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    location1 = locationList.index(str(location_name))
+    location1 = locationList.index(str(location_name))  # set location1 to the index of the name of the location
     # weekday_int = week_days.index(str(weekday))
     model = joblib.load('weeklyvaccdata.joblib')
     predictions = model.predict([[location1, weekday]])  # predict and store results in a list
@@ -132,7 +132,7 @@ def see_predicted_week(location):
     this_week_predicted = []
     for x in range(len(week_days)):
         this_week_predicted.append(predict_appointment(location, x))  # predict for every weekday
-    predicted_plot = plt.plot(week_days, this_week_predicted, marker='o')
+    predicted_plot = plt.plot(week_days, this_week_predicted, marker='o')  # plot the week's predictions
     title_str = "Predicted Appointments for " + location
     plt.title(title_str)
     plt.xlabel("Day of Week")
@@ -140,11 +140,10 @@ def see_predicted_week(location):
     return predicted_plot
 # End of predicted week plotting
 
-# hey figure out how to run this twice a day
 
+# hey figure out how to run this twice a day
 
 # Main testing
 generate_model_location_weekday()
 see_predicted_week('Sockanosset POD')
 # predict_appointment('Sockanosset POD', 'Friday')
-

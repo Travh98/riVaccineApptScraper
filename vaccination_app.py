@@ -11,7 +11,7 @@ import rpi_client as rpi
 import webbrowser
 #Comment or Uncomment next two lines as necessary
 #import vaccine_scraper as vax
-import vax_scrapper as vax
+import vaccine_scraper as vax
 import vaccine_machinelearning_gl as vML
 #import vaccine_machinelearning as vML
 import matplotlib.pyplot as plt

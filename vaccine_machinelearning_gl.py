@@ -38,7 +38,7 @@ locationList = []
 
 def combine_csv():
     # Tutorial: https://www.freecodecamp.org/news/how-to-combine-multiple-csv-files-with-8-lines-of-code-265183e0854/
-    os.chdir("C:\\Users\\Giles Lanowy\\Documents\\ELE408\\data")  # set mydir as the working directory
+    os.chdir("C:\\Users\\Travis\\Documents\\GitHub\\riVaccineApptScraper\\data")  # set mydir as the working directory
     if os.path.exists("combined_csv.csv"):
         os.remove("combined_csv.csv")  # delete the old csv
     else:
